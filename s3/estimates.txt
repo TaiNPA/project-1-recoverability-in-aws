@@ -1,0 +1,25 @@
+1. Minimum RTO for a single AZ outage:
+    00:00 - Problem happens (0 minutes)
+    00:05 - An amount of time passes before an alert triggers (5 minutes)
+    00:06 - Automation switch to another availability zone (1 minutes)
+    Total time: 10 minutes
+
+2. Minimum RTO for a single region outage
+    00:00 - Problem happens (0 minutes)
+    00:05 - An amount of time passes before an alert triggers (5 minutes)
+    00:06 - Alert triggers on-all staff (1 minute)
+    00:16 - On-call staff may need to get out of bed, get to computer, log in, log onto VPN (10 minutes)
+    00:26 - On-call staff starts diagnosing issue (10 minutes)
+    00:41 - Root cause is discovered (10 minutes)
+    00:46 - Remediation started (5 minutes)
+    00:56 - Remediation completed (10 minutes)
+    Total time: 51 minutes
+
+3. Minimum RPO for a single AZ outage
+- RDS has ability point-in-time recovery, it will upload transactions every 5 minute so if this is case happens then
+the most data lost would be 5 minutes
+
+4.Minimum RPO for a single region outage
+- RDS in multiple regions (Multi-AZ), AWS automatically creates and maintains a duplicate database in a different region
+to ensure high availability and quick recovery in case of incidents. The duplicate database in a different region
+almost the same the primary database. For some critical cases we can consider at most the RPO should be ±10 mins.
